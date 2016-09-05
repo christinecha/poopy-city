@@ -22,6 +22,9 @@ p {
 .clickable {
   cursor: pointer;
 }
+.inline {
+  display: inline-block;
+}
 .no-transitions {
   transition: none !important;
   -webkit-transition: none !important;
@@ -139,10 +142,16 @@ button {
   top: 2px;
   text-align: center;
 }
+#rating p {
+  vertical-align: middle;
+  margin-bottom: 0;
+  margin-right: 5px;
+}
 .rating-icon {
+  vertical-align: middle;
   width: 25px;
   height: 25px;
-  margin: 9.5px 6px;
+  margin: 9.5px 5px;
   display: inline-block;
   background-size: contain;
   opacity: 0.4;
