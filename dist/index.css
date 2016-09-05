@@ -47,6 +47,10 @@ p {
   max-width: 250px;
   padding-top: 8px;
 }
+.pac-item *,
+.pac-matched {
+  font-size: 13px;
+}
 #about {
   position: fixed;
   bottom: 0;
