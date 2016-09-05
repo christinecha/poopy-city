@@ -180,10 +180,6 @@ class Marker {
 
 
 /** RUN, FUNCTIONS, RUN ------------------------------ **/
-console.log('----------------------------------------------------------------------')
-console.log('source code ----> https://github.com/christinecha/poopy-city')
-console.log('----------------------------------------------------------------------')
-
 
 getBrowserLocation().then(latlng => {
   const poopMap = new google.maps.Map($map, {
