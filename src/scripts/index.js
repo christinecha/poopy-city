@@ -43,6 +43,8 @@ const getBrowserLocation = () => {
 
       autocomplete.setBounds(circle.getBounds())
       resolve(latlng)
+    }, err => {
+      resolve(null)
     })
   })
 }
