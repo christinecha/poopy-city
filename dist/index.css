@@ -146,6 +146,7 @@ button {
   vertical-align: middle;
   margin-bottom: 0;
   margin-right: 5px;
+  display: inline-block;
 }
 .rating-icon {
   vertical-align: middle;
