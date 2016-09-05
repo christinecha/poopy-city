@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Collaborative Website</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Quicksand|Open+Sans" rel="stylesheet">
+    <link href="./dist/index.css" rel="stylesheet" type="text/css" />
+
+    <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_Kw9ixuTEBOcNwB3tMbI9sUhj8kCUsro&libraries=places"></script>
+    <script>
+      firebase.initializeApp({
+        apiKey: "AIzaSyCqdqe7jqV-cF8HMxyPetT_jr4UP4JN4Yc",
+        authDomain: "poopy-city-1473036830213.firebaseapp.com",
+        databaseURL: "https://poopy-city-1473036830213.firebaseio.com",
+        storageBucket: "poopy-city-1473036830213.appspot.com"
+      })
+    </script>
+  </head>
+
+  <body>
+    <div id="warning"></div>
+
+    <div class="inputs-container">
+      <input id="title-input" placeholder="title your poo (e.g., lean green bean machine)" maxlength="100"/>
+      <input id="map-input" placeholder="where are you pooping?"/>
+      <div id="rating">
+        <div class="rating-icon" data-rating="1"></div>
+        <div class="rating-icon" data-rating="2"></div>
+        <div class="rating-icon" data-rating="3"></div>
+        <div class="rating-icon" data-rating="4"></div>
+        <div class="rating-icon" data-rating="5"></div>
+      </div>
+    </div>
+    <button id="submit">submit</button>
+
+    <div id="loading-message"></div>
+    <div id="map"></div>
+
+    <div id="about">
+      <h1>POOPY.CITY</h1>
+
+      <a href="https://twitter.com/home?status=Ever%20wondered%20who's%20pooping%20nearby?%20No?%20Well,%20here%20you%20go%20anyway.%20http%3A//poopy.city%20%23poopycity">
+        <div class="social-link twitter"></div>
+      </a>
+
+      <a href="https://www.facebook.com/sharer/sharer.php?u=poopy.city" target="_blank">
+        <div class="social-link facebook"></div>
+      </a>
+    </div>
+
+    <!--~~~~~~~~~~~~~~ SCRIPTS ~~~~~~~~~~~~~~-->
+    <script src="./dist/bundle.js"></script>
+
+
+    <!--~~~~~~~~~~~~~~ SCRIPTS ~~~~~~~~~~~~~~-->
+  </body>
+
+</html>

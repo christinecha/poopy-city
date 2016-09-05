@@ -1,0 +1,48 @@
+* {
+  font-family: 'Inconsolata', monospace;
+  margin: 0 0;
+  padding: 0 0;
+  font-size: 0;
+  font-family: 'Quicksand', sans-serif;
+}
+
+body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: @dark-brown;
+}
+
+p { font-size: 13px; margin-bottom: 5px; }
+
+.xsmall { font-size: 9px; text-transform: uppercase; }
+.clickable { cursor: pointer; }
+
+.no-transitions {
+  transition: none !important;
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+}
+
+#warning {
+  height: 20px;
+  width: 100%;
+  padding: 5px;
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 4;
+
+  &.is-active {
+    background-color: rgba(0, 255, 255, 0.8);
+    display: block;
+  }
+}
+
+/** OVERRIDES FOR GOOGLE MAPS **/
+.gm-style .gm-style-iw {
+  overflow: visible;
+  max-width: 250px;
+  padding-top: 8px;
+}

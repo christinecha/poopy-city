@@ -1,0 +1,103 @@
+input, button {
+  padding: 15px;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  font-size: 12px;
+  vertical-align: top;
+}
+
+.inputs-container {
+  width: 80%;
+  display: inline-block;
+  border-bottom: 1px solid @light-brown;
+}
+
+#title-input {
+  width: 100%;
+  border-bottom: 1px solid @light-brown;
+}
+
+#map-input {
+  width: 100%;
+  border-bottom: 1px solid @light-brown;
+}
+
+#rating {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  background-color: @white;
+
+  h2 {
+    width: 100%;
+    top: 2px;
+    text-align: center;
+  }
+}
+
+.rating-icon {
+  width: 25px;
+  height: 25px;
+  margin: 9.5px 6px;
+  display: inline-block;
+  background-size: contain;
+  opacity: 0.4;
+  cursor: pointer;
+
+  &[data-rating="1"] { background-image: url(../assets/rating-1.png); }
+  &[data-rating="2"] { background-image: url(../assets/rating-2.png); }
+  &[data-rating="3"] { background-image: url(../assets/rating-3.png); }
+  &[data-rating="4"] { background-image: url(../assets/rating-4.png); }
+  &[data-rating="5"] { background-image: url(../assets/rating-5.png); }
+
+  &:hover, &.is-selected, &.in-info-window { opacity: 1; }
+
+  &.in-info-window {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    bottom: -35px;
+    left: -10px;
+    opacity: 1;
+  }
+}
+
+#submit {
+  height: 135px;
+  font-size: 0;
+  background-image: url('../assets/poop-icon.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  text-transform: uppercase;
+  width: 20%;
+  background-color: @light-brown;
+  color: @white;
+  font-weight: bold;
+  cursor: pointer;
+
+  &:hover { background-color: @dark-brown; }
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+}
+
+@media (min-width: 800px) {
+  #map-input {
+    width: 70%;
+    border-right: 1px solid @light-brown;
+    border-bottom: none;
+  }
+
+  #rating {
+    width: 30%;
+  }
+
+  #submit {
+    font-size: 15px;
+    height: 90px;
+    background-image: none;
+  }
+}

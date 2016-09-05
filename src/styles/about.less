@@ -1,0 +1,29 @@
+#about {
+  position: fixed;
+  bottom: 0;
+  z-index: 1;
+  color: @light-brown;
+  padding: 10px;
+
+  h1 {
+    font-size: 30px;
+    text-transform: uppercase;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 20px;
+  }
+
+  .social-link {
+    width: 25px;
+    height: 25px;
+    margin: 0 5px;
+    display: inline-block;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    vertical-align: middle;
+
+    &.twitter { background-image: url('../assets/twitter.svg'); }
+    &.facebook { background-image: url('../assets/facebook.svg'); }
+  }
+}
