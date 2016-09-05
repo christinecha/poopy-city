@@ -92,6 +92,11 @@ p {
   -webkit-transition: opacity 0.4s ease-in-out;
   -moz-transition: opacity 0.4s ease-in-out;
 }
+.form {
+  width: 100%;
+  height: 145px;
+  position: relative;
+}
 input,
 button {
   padding: 15px;
@@ -100,25 +105,33 @@ button {
   outline: none;
   font-size: 12px;
   vertical-align: top;
+  border-radius: 0;
 }
 .inputs-container {
   width: 80%;
+  height: 100%;
   display: inline-block;
   border-bottom: 1px solid #bf7c4f;
 }
 #title-input {
   width: 100%;
+  height: 33.3%;
+  box-sizing: border-box;
   border-bottom: 1px solid #bf7c4f;
 }
 #map-input {
   width: 100%;
+  height: 33.3%;
+  box-sizing: border-box;
   border-bottom: 1px solid #bf7c4f;
 }
 #rating {
   width: 100%;
+  height: 33.3%;
   display: inline-block;
   text-align: center;
   background-color: #ffffff;
+  box-sizing: border-box;
 }
 #rating h2 {
   width: 100%;
@@ -163,7 +176,7 @@ button {
   opacity: 1;
 }
 #submit {
-  height: 135px;
+  height: 100%;
   font-size: 0;
   background-image: url('../assets/poop-icon.png');
   background-repeat: no-repeat;
@@ -179,7 +192,7 @@ button {
   background-color: #5d3100;
 }
 #map {
-  height: 100%;
+  height: calc(100vh - 145px);
   width: 100%;
 }
 @media (min-width: 800px) {

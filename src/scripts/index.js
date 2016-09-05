@@ -1,6 +1,7 @@
 // Import Modules
 const mapConfig = require('./configs/map')
-const { setCookie, getCookie } = require('./cookies')
+const setCookie = require('./cookies')
+const getCookie = require('./cookies')
 require('./animatedLoad')
 
 // Grab DOM Elements
@@ -192,6 +193,8 @@ getBrowserLocation().then(latlng => {
     styles: mapConfig.styles,
     streetViewControl: false
   })
+
+  console.log(poopMap)
 
   poopMap.addListener('click', e => {
     const latlng = { lat: e.latLng.lat(), lng: e.latLng.lng() }

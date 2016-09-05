@@ -51,52 +51,63 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 	// Import Modules
-	const mapConfig = __webpack_require__(2);
-	const { setCookie, getCookie } = __webpack_require__(3);
+	var mapConfig = __webpack_require__(2);
+	var setCookie = __webpack_require__(3);
+	var getCookie = __webpack_require__(3);
 	__webpack_require__(4);
 
 	// Grab DOM Elements
-	const $warning = document.getElementById('warning');
-	const $titleInput = document.getElementById('title-input');
-	const $mapInput = document.getElementById('map-input');
-	const $rating = document.getElementById('rating');
-	const $ratingIcons = Array.from($rating.querySelectorAll('.rating-icon'));
-	const $map = document.getElementById('map');
-	const $submit = document.getElementById('submit');
+	var $warning = document.getElementById('warning');
+	var $titleInput = document.getElementById('title-input');
+	var $mapInput = document.getElementById('map-input');
+	var $rating = document.getElementById('rating');
+	var $ratingIcons = Array.from($rating.querySelectorAll('.rating-icon'));
+	var $map = document.getElementById('map');
+	var $submit = document.getElementById('submit');
 
 	// Set Up Google Maps Objects
-	const geocoder = new google.maps.Geocoder();
-	const infowindow = new google.maps.InfoWindow();
-	const autocomplete = new google.maps.places.Autocomplete($mapInput, {});
+	var geocoder = new google.maps.Geocoder();
+	var infowindow = new google.maps.InfoWindow();
+	var autocomplete = new google.maps.places.Autocomplete($mapInput, {});
 
 	// Set Defaults
-	const defaultLatLng = { lat: 40.7128, lng: -74.0059 }; // New York City. Center of the Universe.
+	var defaultLatLng = { lat: 40.7128, lng: -74.0059 }; // New York City. Center of the Universe.
 
 	// Set Variables
-	let chosenPlace;
-	let rating = 0;
-	let myMarker;
+	var chosenPlace = void 0;
+	var rating = 0;
+	var myMarker = void 0;
 
 	/** SHARED FUNCTIONS ------------------------------ **/
-	const getBrowserLocation = () => {
-	  return new Promise((resolve, reject) => {
+	var getBrowserLocation = function getBrowserLocation() {
+	  return new Promise(function (resolve, reject) {
 	    if (!navigator.geolocation) {
 	      resolve(null);
 	      return;
 	    }
 
-	    navigator.geolocation.getCurrentPosition(position => {
-	      const { accuracy, latitude, longitude } = position.coords;
-	      const latlng = { lat: latitude, lng: longitude };
-	      const circle = new google.maps.Circle({
+	    navigator.geolocation.getCurrentPosition(function (position) {
+	      var _position$coords = position.coords;
+	      var accuracy = _position$coords.accuracy;
+	      var latitude = _position$coords.latitude;
+	      var longitude = _position$coords.longitude;
+
+	      var latlng = { lat: latitude, lng: longitude };
+	      var circle = new google.maps.Circle({
 	        center: latlng,
 	        radius: accuracy
 	      });
 
 	      autocomplete.setBounds(circle.getBounds());
 	      resolve(latlng);
-	    }, err => {
+	    }, function (err) {
 	      resolve(null);
 	    });
 	  });
@@ -105,48 +116,50 @@
 	/* This function watches the value of /nodes and will
 	* fire the callback every time the value changes.
 	*/
-	const now = new Date().getTime();
-	const tenMinutesAgo = now - 1000 * 60 * 10;
+	var now = new Date().getTime();
+	var tenMinutesAgo = now - 1000 * 60 * 10;
 
-	const cleanMarkers = () => {
-	  firebase.database().ref('/poop-markers').orderByChild('createdAt').endAt(tenMinutesAgo).once('value', snapshot => {
-	    const markers = snapshot.val();
-	    for (let i in markers) {
-	      firebase.database().ref(`/poop-markers/${ i }`).remove();
+	var cleanMarkers = function cleanMarkers() {
+	  firebase.database().ref('/poop-markers').orderByChild('createdAt').endAt(tenMinutesAgo).once('value', function (snapshot) {
+	    var markers = snapshot.val();
+	    for (var i in markers) {
+	      firebase.database().ref('/poop-markers/' + i).remove();
 	    }
 	  });
 	};
 
-	const watchMarkers = callback => {
-	  firebase.database().ref('/poop-markers').orderByChild('createdAt').startAt(tenMinutesAgo).on('value', snapshot => {
-	    const markers = snapshot.val();
+	var watchMarkers = function watchMarkers(callback) {
+	  firebase.database().ref('/poop-markers').orderByChild('createdAt').startAt(tenMinutesAgo).on('value', function (snapshot) {
+	    var markers = snapshot.val();
 	    callback(markers);
 	  });
 	};
 
-	const warn = msg => {
+	var warn = function warn(msg) {
 	  $warning.style.display = 'inline-block';
 	  $warning.innerText = msg;
 
-	  setTimeout(() => {
+	  setTimeout(function () {
 	    $warning.style.display = 'none';
 	  }, 3000);
 	};
 
-	$titleInput.addEventListener('keyup', e => {
+	$titleInput.addEventListener('keyup', function (e) {
 	  if (myMarker) myMarker.render();
 	});
 
-	$rating.addEventListener('click', e => {
+	$rating.addEventListener('click', function (e) {
 	  if (!e.target.classList.contains('rating-icon')) return;
 
-	  $ratingIcons.forEach(icon => icon.classList.remove('is-selected'));
+	  $ratingIcons.forEach(function (icon) {
+	    return icon.classList.remove('is-selected');
+	  });
 	  e.target.classList.add('is-selected');
 	  rating = e.target.getAttribute('data-rating');
 	  if (myMarker) myMarker.render();
 	});
 
-	$submit.addEventListener('click', e => {
+	$submit.addEventListener('click', function (e) {
 	  e.preventDefault();
 
 	  if (!chosenPlace) {
@@ -159,7 +172,7 @@
 	    return;
 	  }
 
-	  const poopy = {
+	  var poopy = {
 	    createdAt: new Date().getTime(),
 	    formatted_address: chosenPlace.formatted_address,
 	    geometry: {
@@ -182,8 +195,10 @@
 	  myMarker.hide();
 	});
 
-	class Marker {
-	  constructor(place, map) {
+	var Marker = function () {
+	  function Marker(place, map) {
+	    _classCallCheck(this, Marker);
+
 	    this.map = map;
 	    this.place = place;
 	    this.formatted_address = place.formatted_address;
@@ -196,45 +211,56 @@
 	    });
 	  }
 
-	  hide() {
-	    infowindow.close();
-	  }
+	  _createClass(Marker, [{
+	    key: 'hide',
+	    value: function hide() {
+	      infowindow.close();
+	    }
+	  }, {
+	    key: 'updatePlace',
+	    value: function updatePlace(place) {
+	      this.position = place.geometry.location;
+	      this.formatted_address = place.formatted_address;
+	      this.marker.setPosition(this.position);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      this.map.panTo(this.position);
+	      this.map.setCenter(this.position);
 
-	  updatePlace(place) {
-	    this.position = place.geometry.location;
-	    this.formatted_address = place.formatted_address;
-	    this.marker.setPosition(this.position);
-	  }
+	      this.title = this.place.title || $titleInput.value;
+	      this.rating = this.place.rating || rating;
 
-	  render() {
-	    this.map.panTo(this.position);
-	    this.map.setCenter(this.position);
+	      infowindow.setContent('<p>' + this.title + '</p>' + '<p class="xsmall">' + this.formatted_address + '</p>' + '<div class="rating-icon in-info-window" data-rating="' + this.rating + '"></div>');
+	      infowindow.open(this.map, this.marker);
+	    }
+	  }]);
 
-	    this.title = this.place.title || $titleInput.value;
-	    this.rating = this.place.rating || rating;
-
-	    infowindow.setContent('<p>' + this.title + '</p>' + '<p class="xsmall">' + this.formatted_address + '</p>' + '<div class="rating-icon in-info-window" data-rating="' + this.rating + '"></div>');
-	    infowindow.open(this.map, this.marker);
-	  }
-	}
+	  return Marker;
+	}();
 
 	/** RUN, FUNCTIONS, RUN ------------------------------ **/
+
+
 	console.log('----------------------------------------------------------------------');
 	console.log('source code ----> https://github.com/christinecha/poopy-city');
 	console.log('----------------------------------------------------------------------');
 
-	getBrowserLocation().then(latlng => {
-	  const poopMap = new google.maps.Map($map, {
+	getBrowserLocation().then(function (latlng) {
+	  var poopMap = new google.maps.Map($map, {
 	    center: latlng || defaultLatLng,
 	    zoom: 14,
 	    styles: mapConfig.styles,
 	    streetViewControl: false
 	  });
 
-	  poopMap.addListener('click', e => {
-	    const latlng = { lat: e.latLng.lat(), lng: e.latLng.lng() };
+	  console.log(poopMap);
 
-	    geocoder.geocode({ location: latlng }, (results, status) => {
+	  poopMap.addListener('click', function (e) {
+	    var latlng = { lat: e.latLng.lat(), lng: e.latLng.lng() };
+
+	    geocoder.geocode({ location: latlng }, function (results, status) {
 	      if (status !== 'OK' || !results[0]) return;
 
 	      chosenPlace = results[0];
@@ -244,8 +270,8 @@
 	    });
 	  });
 
-	  autocomplete.addListener('place_changed', e => {
-	    const place = autocomplete.getPlace();
+	  autocomplete.addListener('place_changed', function (e) {
+	    var place = autocomplete.getPlace();
 
 	    if (!place.geometry) return;
 
@@ -257,14 +283,18 @@
 	  autocomplete.bindTo('bounds', poopMap);
 
 	  cleanMarkers();
-	  watchMarkers(markers => {
+	  watchMarkers(function (markers) {
 	    if (!markers) return;
 
-	    for (let i in markers) {
-	      const m = new Marker(markers[i], poopMap);
-	      m.marker.addListener('click', e => {
+	    var _loop = function _loop(i) {
+	      var m = new Marker(markers[i], poopMap);
+	      m.marker.addListener('click', function (e) {
 	        m.render();
 	      });
+	    };
+
+	    for (var i in markers) {
+	      _loop(i);
 	    }
 	  });
 	});
@@ -273,7 +303,9 @@
 /* 2 */
 /***/ function(module, exports) {
 
-	const styles = [{
+	'use strict';
+
+	var styles = [{
 	  featureType: 'all',
 	  stylers: [{ saturation: -80 }]
 	}, {
@@ -290,20 +322,22 @@
 	  stylers: [{ visibility: 'off' }]
 	}];
 
-	module.exports = { styles };
+	module.exports = { styles: styles };
 
 /***/ },
 /* 3 */
 /***/ function(module, exports) {
 
-	const setCookie = (cname, cvalue, minutes) => {
+	"use strict";
+
+	var setCookie = function setCookie(cname, cvalue, minutes) {
 	  var d = new Date();
 	  d.setTime(d.getTime() + minutes * 60 * 1000);
 	  var expires = "expires=" + d.toUTCString();
 	  document.cookie = cname + "=" + cvalue + "; " + expires;
 	};
 
-	const getCookie = cname => {
+	var getCookie = function getCookie(cname) {
 	  var name = cname + "=";
 	  var ca = document.cookie.split(';');
 	  for (var i = 0; i < ca.length; i++) {
@@ -318,26 +352,28 @@
 	  return "";
 	};
 
-	module.exports = { setCookie, getCookie };
+	module.exports = { setCookie: setCookie, getCookie: getCookie };
 
 /***/ },
 /* 4 */
 /***/ function(module, exports) {
 
-	const messages = ['baking brownies...', 'letting loose...', 'making gravy...', 'cleaning the tuba...', 'feeding the fish...'];
+	'use strict';
 
-	const $loadingMessage = document.getElementById('loading-message');
+	var messages = ['baking brownies...', 'letting loose...', 'making gravy...', 'cleaning the tuba...', 'feeding the fish...'];
 
-	let index = 0;
+	var $loadingMessage = document.getElementById('loading-message');
+
+	var index = 0;
 	$loadingMessage.innerText = messages[index];
 
-	const handleTransitionEnd = () => {
+	var handleTransitionEnd = function handleTransitionEnd() {
 	  $loadingMessage.innerText = messages[index];
 	  $loadingMessage.style.opacity = 1;
 	  $loadingMessage.removeEventListener('transitionend', handleTransitionEnd);
 	};
 
-	setInterval(() => {
+	setInterval(function () {
 	  $loadingMessage.style.opacity = 0;
 	  index++;
 	  if (!messages[index]) index = 0;

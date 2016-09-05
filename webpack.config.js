@@ -6,15 +6,18 @@ module.exports = {
   ],
   output: {
     publicPath: '/dist/',
-    path: __dirname,
+    path: __dirname + '/dist/',
     filename: 'bundle.js'
   },
   module: {
     loaders: [
       {
         test: /\.js?$/,
-        loaders: ['babel-loader'],
-        exclude: /node_modules/
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        query: {
+          presets: ['es2015']
+        }
       }
     ],
   },

@@ -24,18 +24,20 @@
   <body>
     <div id="warning"></div>
 
-    <div class="inputs-container">
-      <input id="title-input" placeholder="title your poo (e.g., lean green bean machine)" maxlength="100"/>
-      <input id="map-input" placeholder="where are you pooping?"/>
-      <div id="rating">
-        <div class="rating-icon" data-rating="1"></div>
-        <div class="rating-icon" data-rating="2"></div>
-        <div class="rating-icon" data-rating="3"></div>
-        <div class="rating-icon" data-rating="4"></div>
-        <div class="rating-icon" data-rating="5"></div>
+    <div class="form">
+      <div class="inputs-container">
+        <input id="title-input" placeholder="title your poo (e.g., lean green bean machine)" maxlength="100"/>
+        <input id="map-input" placeholder="where are you pooping?"/>
+        <div id="rating">
+          <div class="rating-icon" data-rating="1"></div>
+          <div class="rating-icon" data-rating="2"></div>
+          <div class="rating-icon" data-rating="3"></div>
+          <div class="rating-icon" data-rating="4"></div>
+          <div class="rating-icon" data-rating="5"></div>
+        </div>
       </div>
+      <button id="submit">submit</button>
     </div>
-    <button id="submit">submit</button>
 
     <div id="loading-message"></div>
     <div id="map"></div>
@@ -55,7 +57,15 @@
     <!--~~~~~~~~~~~~~~ SCRIPTS ~~~~~~~~~~~~~~-->
     <script src="./dist/bundle.js"></script>
 
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
+      ga('create', 'UA-83713273-1', 'auto');
+      ga('send', 'pageview');
+    </script>
     <!--~~~~~~~~~~~~~~ SCRIPTS ~~~~~~~~~~~~~~-->
   </body>
 
