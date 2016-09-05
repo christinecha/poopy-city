@@ -217,6 +217,9 @@ button {
     height: 90px;
     background-image: none;
   }
+  #map {
+    height: calc(100vh - 90px);
+  }
 }
 #warning {
   position: absolute;
