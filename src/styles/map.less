@@ -1,7 +1,8 @@
 .form {
   width: 100%;
-  height: 145px;
+  height: 144px;
   position: relative;
+  border-bottom: 1px solid @light-brown;
 }
 
 input, button {
@@ -18,7 +19,6 @@ input, button {
   width: 80%;
   height: 100%;
   display: inline-block;
-  border-bottom: 1px solid @light-brown;
 }
 
 #title-input {
@@ -99,14 +99,22 @@ input, button {
 }
 
 @media (min-width: 800px) {
+  .form { height: 90px; }
+
   #map-input {
     width: 70%;
+    height: 50%;
     border-right: 1px solid @light-brown;
     border-bottom: none;
   }
 
+  #title-input {
+    height: 50%;
+  }
+
   #rating {
     width: 30%;
+    height: 50%;
   }
 
   #submit {
