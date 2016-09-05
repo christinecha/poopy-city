@@ -1,7 +1,6 @@
 // Import Modules
 const mapConfig = require('./configs/map')
-const setCookie = require('./cookies')
-const getCookie = require('./cookies')
+const { setCookie, getCookie } = require('./cookies')
 require('./animatedLoad')
 
 // Grab DOM Elements
