@@ -59,8 +59,12 @@
 
 	// Import Modules
 	var mapConfig = __webpack_require__(2);
-	var setCookie = __webpack_require__(3);
-	var getCookie = __webpack_require__(3);
+
+	var _require = __webpack_require__(3);
+
+	var setCookie = _require.setCookie;
+	var getCookie = _require.getCookie;
+
 	__webpack_require__(4);
 
 	// Grab DOM Elements
@@ -184,7 +188,6 @@
 	    rating: parseInt(rating),
 	    title: $titleInput.value || ''
 	  };
-	  console.log(poopy);
 	  firebase.database().ref('/poop-markers').push(poopy);
 
 	  setCookie('isPooping', 'true', 10);
@@ -242,11 +245,6 @@
 
 	/** RUN, FUNCTIONS, RUN ------------------------------ **/
 
-
-	console.log('----------------------------------------------------------------------');
-	console.log('source code ----> https://github.com/christinecha/poopy-city');
-	console.log('----------------------------------------------------------------------');
-
 	getBrowserLocation().then(function (latlng) {
 	  var poopMap = new google.maps.Map($map, {
 	    center: latlng || defaultLatLng,
@@ -254,8 +252,6 @@
 	    styles: mapConfig.styles,
 	    streetViewControl: false
 	  });
-
-	  console.log(poopMap);
 
 	  poopMap.addListener('click', function (e) {
 	    var latlng = { lat: e.latLng.lat(), lng: e.latLng.lng() };
@@ -282,7 +278,7 @@
 
 	  autocomplete.bindTo('bounds', poopMap);
 
-	  cleanMarkers();
+	  // cleanMarkers()
 	  watchMarkers(function (markers) {
 	    if (!markers) return;
 
