@@ -126,7 +126,6 @@ $submit.addEventListener('click', e => {
     rating: parseInt(rating),
     title: $titleInput.value || ''
   }
-  console.log(poopy)
   firebase.database().ref('/poop-markers').push(poopy)
 
   setCookie('isPooping', 'true', 10)
@@ -194,8 +193,6 @@ getBrowserLocation().then(latlng => {
     streetViewControl: false
   })
 
-  console.log(poopMap)
-
   poopMap.addListener('click', e => {
     const latlng = { lat: e.latLng.lat(), lng: e.latLng.lng() }
 
@@ -223,7 +220,7 @@ getBrowserLocation().then(latlng => {
 
   autocomplete.bindTo('bounds', poopMap)
 
-  cleanMarkers()
+  // cleanMarkers()
   watchMarkers(markers => {
     if (!markers) return
 
